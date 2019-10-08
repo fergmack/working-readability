@@ -1,0 +1,35 @@
+import readability
+import pandas as pd
+
+raw_string = '''Marketers often think of search and video as two distinct channels that require different strategies and even separate teams. But people don’t experience them in silos at all. They use them together as critical resources on their path to purchase.Here are three things we’ve learned about the interconnected role of Google Search and YouTube in the customer journey, how essential both are for people seeking product information and how marketers can use one channel to influence the other.People move through the purchase journey on their own terms, seamlessly shifting between search and video People use video to learn more about a product People use search to understand the logistical and technical aspects of a product Search, video and your brandOur research shows that, on average, advertisers who run YouTube video ads in addition to Google Search ads see 3% higher search conversion rates and a 4% lower search cost per acquisition compared to advertisers who run Google Search ads alone.1What does this mean for your own plans? Since people don’t think of search and video in siloed terms, neither should you. By approaching them holistically, you’ll ensure you’re reaching people wherever they are in the journey, and you’ll get more out of both channels.For more inspiration on how to respond to changing consumer behaviour, explore how online video inspires action.'''
+#  A function to split out each sentence on a new line
+def format_text(sentence):
+    sentenceSplit = filter(None, sentence.split("."))
+    for s in sentenceSplit:
+        # All functions return None implicitly if no return statement 
+        # was encountered during execution of the function
+        return (s.strip() + ".")
+    
+text = format_text(raw_string)
+# type(text)
+results = readability.getmeasures(text, lang='en')
+print(results['readability grades']['FleschReadingEase'])
+
+# get csv
+# get column
+# get text
+# carry out code above
+twg = pd.read_csv('twg.csv')
+
+# select both columns
+twg[['title', 'body']]
+
+# select one
+twg = twg[['body', 'title']]
+
+for i, j in twg.itertuples(index=False):
+    raw_string = str(i)
+    text = format_text(raw_string)
+    results = readability.getmeasures(text, lang='en')
+    print(j)
+    print(results['readability grades']['FleschReadingEase'])
