@@ -27,9 +27,19 @@ twg[['title', 'body']]
 # select one
 twg = twg[['body', 'title']]
 
+title = []
+score = []
 for i, j in twg.itertuples(index=False):
     raw_string = str(i)
     text = format_text(raw_string)
     results = readability.getmeasures(text, lang='en')
-    print(j)
-    print(results['readability grades']['FleschReadingEase'])
+    title.append(j)
+    grade = (results['readability grades']['FleschReadingEase'])
+    score.append(grade)
+    
+
+#     print(results['readability grades']['FleschReadingEase'])
+    
+df = pd.DataFrame(list(zip(title, score)))
+print (df )
+    
