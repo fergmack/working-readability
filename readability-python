@@ -37,7 +37,6 @@ for i, j in twg.itertuples(index=False):
     grade = (results['readability grades']['FleschReadingEase'])
     score.append(grade)
     
-
 #     print(results['readability grades']['FleschReadingEase'])
     
 df = pd.DataFrame(list(zip(title, score)))
